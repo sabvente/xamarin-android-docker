@@ -2,7 +2,7 @@
 
 [![dockeri.co](http://dockeri.co/image/sabvente/xamarin-android-docker)](https://hub.docker.com/r/sabvente/xamarin-android-docker/)
 
-Docker image for building Xamarin Android
+Docker image for building Xamarin Android apps
 
 ### Compatibility
  - Android SDK 27
