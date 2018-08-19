@@ -15,8 +15,6 @@ RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc && \
     chown root:root /etc/yum.repos.d/microsoft-prod.repo
 RUN dnf install dotnet-sdk-2.1 -y
 
-RUN export MSBuildSDKsPath=/usr/share/dotnet/sdk/$(dotnet --version)/Sdks
-
 RUN mkdir -p /android/sdk && \
     curl -k https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -o sdk-tools-linux-4333796.zip && \
     unzip -q sdk-tools-linux-4333796.zip -d /android/sdk && \
@@ -33,12 +31,10 @@ RUN bzip2 -cd xamarin.tar.bz2 | tar -xvf -
 RUN mv xamarin.android-oss_v* /android/xamarin && \
     rm -f xamarin.tar.bz2
 
-# Xamarin.Android build depends on libzip 1.1.3
-RUN wget https://rpmfind.net/linux/remi/fedora/24/remi/x86_64/libzip-1.1.3-1.fc24.remi.x86_64.rpm && \
-    dnf install libzip-1.1.3-1.fc24.remi.x86_64.rpm -y && \
-    rm libzip-1.1.3-1.fc24.remi.x86_64.rpm
+# Xamarin.Android build depends on libzip.so.4
+RUN ln -s /usr/lib64/libzip.so.5 /usr/lib64/libzip.so.4
 
-ENV ANDROID_SDK_PATH=/android/sdk/
+ENV MSBuildSDKsPath=/usr/share/dotnet/sdk/2.1.400/Sdks
 ENV PATH=/android/xamarin/bin/Debug/bin:$PATH
 ENV JAVA_HOME=/usr/lib/jvm/java/
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=true
