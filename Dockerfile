@@ -13,7 +13,7 @@ RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc && \
     wget -q https://packages.microsoft.com/config/fedora/27/prod.repo && \
     mv prod.repo /etc/yum.repos.d/microsoft-prod.repo && \
     chown root:root /etc/yum.repos.d/microsoft-prod.repo
-RUN dnf install dotnet-sdk-2.1 -y
+RUN dnf install dotnet-sdk-2.2 -y
 
 RUN mkdir -p /android/sdk && \
     curl -k https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -o sdk-tools-linux-4333796.zip && \
