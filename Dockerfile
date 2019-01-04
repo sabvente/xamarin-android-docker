@@ -34,7 +34,7 @@ RUN mv xamarin.android-oss_v* /android/xamarin && \
 # Xamarin.Android build depends on libzip.so.4
 RUN ln -s /usr/lib64/libzip.so.5 /usr/lib64/libzip.so.4
 
-ENV MSBuildSDKsPath=/usr/share/dotnet/sdk/2.1.400/Sdks
+ENV MSBuildSDKsPath=/usr/share/dotnet/sdk/2.2.101/Sdks
 ENV PATH=/android/xamarin/bin/Debug/bin:$PATH
 ENV JAVA_HOME=/usr/lib/jvm/java/
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=true
