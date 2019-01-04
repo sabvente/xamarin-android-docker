@@ -24,7 +24,7 @@ RUN cd /android/sdk && \
     yes | ./tools/bin/sdkmanager --licenses && \
     ./tools/bin/sdkmanager "build-tools;27.0.3" "platform-tools" "platforms;android-26" "platforms;android-27"
 
-RUN llynx -listonly -dump https://jenkins.mono-project.com/view/Xamarin.Android/job/xamarin-android-linux/lastSuccessfulBuild/Azure/ | grep -o "https://.*/Azure/processDownloadRequest/xamarin-android/xamarin.android-oss_v.*Debug*.tar.bz2" > link.txt
+RUN lynx -listonly -dump https://jenkins.mono-project.com/view/Xamarin.Android/job/xamarin-android-linux/lastSuccessfulBuild/Azure/ | grep -o "https://.*/Azure/processDownloadRequest/xamarin-android/xamarin.android-oss_v.*Debug*.tar.bz2" > link.txt
 RUN curl -L $(cat link.txt) \
         -o xamarin.tar.bz2
 RUN bzip2 -cd xamarin.tar.bz2 | tar -xvf -
