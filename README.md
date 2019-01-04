@@ -6,4 +6,6 @@ Docker image for building Xamarin Android apps
 
 ### Compatibility
  - Android SDK 27
- - .NET Core SDK 2.1
+ - .NET Core SDK 2.2
+ - msbuild 16.0.0.0
+ - mono 5.18.0.225

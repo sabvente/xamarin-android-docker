@@ -13,7 +13,7 @@ RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc && \
     wget -q https://packages.microsoft.com/config/fedora/27/prod.repo && \
     mv prod.repo /etc/yum.repos.d/microsoft-prod.repo && \
     chown root:root /etc/yum.repos.d/microsoft-prod.repo
-RUN dnf install dotnet-sdk-2.1 -y
+RUN dnf install dotnet-sdk-2.2 -y
 
 RUN mkdir -p /android/sdk && \
     curl -k https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -o sdk-tools-linux-4333796.zip && \
@@ -24,7 +24,7 @@ RUN cd /android/sdk && \
     yes | ./tools/bin/sdkmanager --licenses && \
     ./tools/bin/sdkmanager "build-tools;27.0.3" "platform-tools" "platforms;android-26" "platforms;android-27"
 
-RUN lynx -listonly -dump https://jenkins.mono-project.com/view/Xamarin.Android/job/xamarin-android-linux/lastSuccessfulBuild/Azure/ | grep -o "https://.*/Azure/processDownloadRequest/xamarin-android/xamarin.android-oss_v.*.tar.bz2" > link.txt
+RUN lynx -listonly -dump https://jenkins.mono-project.com/view/Xamarin.Android/job/xamarin-android-linux/lastSuccessfulBuild/Azure/ | grep -o "https://.*/Azure/processDownloadRequest/xamarin-android/xamarin.android-oss_v.*Debug*.tar.bz2" > link.txt
 RUN curl -L $(cat link.txt) \
         -o xamarin.tar.bz2
 RUN bzip2 -cd xamarin.tar.bz2 | tar -xvf -
@@ -34,7 +34,7 @@ RUN mv xamarin.android-oss_v* /android/xamarin && \
 # Xamarin.Android build depends on libzip.so.4
 RUN ln -s /usr/lib64/libzip.so.5 /usr/lib64/libzip.so.4
 
-ENV MSBuildSDKsPath=/usr/share/dotnet/sdk/2.1.400/Sdks
+ENV MSBuildSDKsPath=/usr/share/dotnet/sdk/2.2.101/Sdks
 ENV PATH=/android/xamarin/bin/Debug/bin:$PATH
 ENV JAVA_HOME=/usr/lib/jvm/java/
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=true
